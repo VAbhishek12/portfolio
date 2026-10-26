@@ -1,4 +1,4 @@
-import { projects, type Project } from "../data/portfolio";
+import { moreProjects, projects, type Project } from "../data/portfolio";
 import Reveal, { SectionHeading, trackPointer } from "./Reveal";
 
 const accentVar = { a: "var(--accent)", b: "var(--accent-2)", c: "var(--accent-3)" } as const;
@@ -95,6 +95,32 @@ export default function Projects() {
         {projects.map((p, i) => (
           <Reveal key={p.id} delay={(i % 2) * 0.08} className={p.featured ? "md:col-span-2" : ""}>
             <Card p={p} />
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal className="mb-6 mt-24">
+        <h3 className="display text-2xl sm:text-3xl">More projects</h3>
+        <p className="mt-2 text-mist">Smaller builds across recommenders, fraud detection, forecasting and generative AI.</p>
+      </Reveal>
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {moreProjects.map((m, i) => (
+          <Reveal key={m.repo} delay={(i % 3) * 0.07}>
+            <a
+              href={m.repo}
+              target="_blank"
+              rel="noreferrer"
+              onMouseMove={trackPointer}
+              className="spot card group flex h-full flex-col rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1"
+            >
+              <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{m.kicker}</p>
+              <h4 className="display mt-2 text-xl">{m.title}</h4>
+              <p className="mt-3 flex-1 leading-relaxed text-mist">{m.summary}</p>
+              <p className="mt-5 font-mono text-xs text-mist">{m.tech.join("  ·  ")}</p>
+              <span className="mt-5 text-sm font-medium transition-colors group-hover:text-accent">
+                View on GitHub <span className="inline-block transition-transform group-hover:translate-x-1">↗</span>
+              </span>
+            </a>
           </Reveal>
         ))}
       </div>

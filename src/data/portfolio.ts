@@ -3,7 +3,7 @@
 export const profile = {
   name: "Vedula Abhishek",
   status: "Research Fellow · CVIT, IIIT Hyderabad",
-  headline: ["Teaching machines", "to read the road."],
+  headline: ["Vision-language AI", "for safer roads."],
   tagline:
     "I build vision-language and detection systems that connect what a camera sees to where it happened and which road-safety rule applies.",
   location: "India",
@@ -142,6 +142,57 @@ export const projects: Project[] = [
     repo: "https://github.com/VAbhishek12/BrainTumor_Detection",
     demo: "https://braintumourdetction-12.streamlit.app/",
     accent: "c",
+  },
+];
+
+export interface MiniProject {
+  title: string;
+  kicker: string;
+  summary: string;
+  tech: string[];
+  repo: string;
+}
+
+export const moreProjects: MiniProject[] = [
+  {
+    title: "Book Recommendation System",
+    kicker: "Recommender systems",
+    summary:
+      "Collaborative filtering with cosine similarity on Book-Crossing ratings, served as a Streamlit app that suggests similar books.",
+    tech: ["Python", "Pandas", "scikit-learn", "Streamlit"],
+    repo: "https://github.com/VAbhishek12/Book_Recomandation_System",
+  },
+  {
+    title: "Credit Card Fraud Detection",
+    kicker: "Classification · Imbalanced data",
+    summary:
+      "Fraud classifier on 284,807 transactions (492 fraudulent). Amounts scaled, classes balanced with SMOTE, and several models compared, with ensembles such as Random Forest performing best.",
+    tech: ["Python", "scikit-learn", "SMOTE", "Pandas"],
+    repo: "https://github.com/VAbhishek12/Credit_Card_Fraud_Detection",
+  },
+  {
+    title: "Gold Price Prediction",
+    kicker: "Time-series regression",
+    summary:
+      "Forecasts gold prices from historical data: cleaning, exploratory analysis, regression models evaluated with MSE and MAE, and a saved model with a deployment script.",
+    tech: ["Python", "scikit-learn", "Pandas", "Matplotlib", "Joblib"],
+    repo: "https://github.com/VAbhishek12/GoldPricePrediction",
+  },
+  {
+    title: "Med AI · Medical Image Analysis",
+    kicker: "Generative AI · Streamlit",
+    summary:
+      "Upload a medical image and get a structured analysis: image type and region, key findings, assessment and a plain-language explanation, generated with Google Gemini.",
+    tech: ["Python", "Streamlit", "Google Gemini", "Pillow"],
+    repo: "https://github.com/VAbhishek12/Med_AI",
+  },
+  {
+    title: "ML Algorithms Library",
+    kicker: "Learning notebooks",
+    summary:
+      "Hands-on notebooks across 17 topics: clustering, decision trees, SVM, KNN, PCA, random forests, forecasting, hypothesis testing, text mining, neural networks and more.",
+    tech: ["Python", "Jupyter", "scikit-learn", "Statsmodels", "Keras"],
+    repo: "https://github.com/VAbhishek12/ML_Algorithms_Library",
   },
 ];
 
