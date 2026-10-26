@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 
 interface Node {
   x: number;
@@ -43,6 +43,25 @@ export default function NetworkCanvas() {
 
     const LINK = 130;
 
+    // Theme-aware colours, read from CSS variables as "r,g,b".
+    const rgb = (name: string, fallback: string) => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+      const m = v.match(/^#([0-9a-f]{6})$/i);
+      if (!m) return fallback.split(",").map(Number);
+      const n = parseInt(m[1], 16);
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    };
+    let colA = rgb("--accent", "255,138,76");
+    let colB = rgb("--accent-2", "122,162,255");
+    let colDot = rgb("--snow", "244,239,231");
+    const refreshColours = () => {
+      colA = rgb("--accent", "255,138,76");
+      colB = rgb("--accent-2", "122,162,255");
+      colDot = rgb("--snow", "244,239,231");
+    };
+    const themeObserver = new MutationObserver(refreshColours);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       for (const n of nodes) {
@@ -59,7 +78,7 @@ export default function NetworkCanvas() {
           const b = nodes[j];
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < LINK) {
-            ctx.strokeStyle = `rgba(45,212,191,${0.18 * (1 - d / LINK)})`;
+            ctx.strokeStyle = `rgba(${colA[0]},${colA[1]},${colA[2]},${0.28 * (1 - d / LINK)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -69,13 +88,13 @@ export default function NetworkCanvas() {
         }
         const dp = Math.hypot(a.x - pointer.x, a.y - pointer.y);
         if (dp < 170) {
-          ctx.strokeStyle = `rgba(167,139,250,${0.5 * (1 - dp / 170)})`;
+          ctx.strokeStyle = `rgba(${colB[0]},${colB[1]},${colB[2]},${0.65 * (1 - dp / 170)})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(pointer.x, pointer.y);
           ctx.stroke();
         }
-        ctx.fillStyle = "rgba(232,235,241,0.7)";
+        ctx.fillStyle = `rgba(${colDot[0]},${colDot[1]},${colDot[2]},0.6)`;
         ctx.beginPath();
         ctx.arc(a.x, a.y, 1.6, 0, Math.PI * 2);
         ctx.fill();
@@ -107,6 +126,7 @@ export default function NetworkCanvas() {
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
+      themeObserver.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);

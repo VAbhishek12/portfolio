@@ -2,56 +2,84 @@
 
 export const profile = {
   name: "Vedula Abhishek",
-  role: "AI & Data Science Engineer",
-  roles: ["Machine Learning", "Computer Vision", "NLP & RAG", "Adversarial Robustness"],
+  status: "Research Fellow · CVIT, IIIT Hyderabad",
+  headline: ["Teaching machines", "to read the road."],
+  tagline:
+    "I build vision-language and detection systems that connect what a camera sees to where it happened and which road-safety rule applies.",
   location: "India",
   email: "abhishekvedula12@gmail.com",
   github: "https://github.com/VAbhishek12",
-  linkedin: "https://www.linkedin.com/in/v-abhishek-115504214/",
+  linkedin: "https://www.linkedin.com/in/vedula-abhishek-115504214/",
   resume: "/Vedula_Abhishek_Resume.pdf",
-  tagline:
-    "M.Tech student in Computer Science (AI) at C-DAC Mohali. I build models that work on messy data, and I study when they break.",
-  summary: [
-    "I'm a postgraduate student pursuing an M.Tech in Computer Science and Engineering (AI) at C-DAC Mohali, with a strong interest in data science and analytics.",
-    "My work spans data cleaning, exploratory analysis, visualization and machine learning in Python and SQL, from a recommender system and a RAG-based medical chatbot to a CNN for brain-tumor detection. My thesis studies adversarial robustness of CNNs on CIFAR-10.",
-    "I like finding patterns in data, turning them into insight that supports decisions, and shipping them as small apps people can actually try.",
+  about: [
+    "I'm a Research Fellow at the Centre for Visual Information Technology (CVIT), IIIT Hyderabad, working on drone video analytics and on vision-language models for road-infrastructure auditing.",
+    "My day-to-day mixes object detection, VLM and LLM fine-tuning, and multi-sensor reasoning: linking braking and swerving events from IMU and GPS data to road conditions and Indian Roads Congress rules.",
+    "Before that I worked as a data science intern, building Streamlit apps and analysis pipelines. I like experiments that are controlled, results that are reproducible, and demos people can click.",
   ],
 };
 
-export const stats = [
-  { value: "8.72", label: "M.Tech CGPA" },
-  { value: "6 mo", label: "Data science internship" },
-  { value: "4", label: "Public projects" },
-  { value: "4", label: "Certifications" },
+export const highlights = [
+  { value: "ICVGIP '26", label: "Paper accepted" },
+  { value: "9.0", label: "M.Tech CGPA" },
+  { value: "3", label: "YOLO generations benchmarked" },
+  { value: "24", label: "Object classes across 2 datasets" },
 ];
 
-export const education = [
+export const marquee = [
+  "PyTorch",
+  "YOLO",
+  "Vision-Language Models",
+  "PEFT",
+  "VQA",
+  "RAG",
+  "TensorFlow Lite",
+  "OpenCV",
+  "Adversarial Training",
+  "Hugging Face",
+  "Docker",
+  "Streamlit",
+];
+
+export const skillGroups = [
+  { title: "Languages", items: ["Python", "SQL"] },
+  { title: "Multimodal AI & NLP", items: ["VLMs", "LLMs", "PEFT", "Custom Adapters", "Zero-shot Evaluation", "VQA"] },
+  { title: "Retrieval", items: ["Retrieval-Augmented Generation (RAG)", "Embeddings"] },
   {
-    school: "Centre for Development of Advanced Computing (C-DAC), Mohali",
-    degree: "M.Tech, Computer Science and Engineering (AI)",
-    period: "2024 – 2026 (expected)",
-    score: "CGPA 8.72",
+    title: "Machine Learning & Vision",
+    items: ["YOLO", "CNNs", "Object Detection", "Adversarial Training", "OpenCV", "Model Evaluation"],
   },
   {
-    school: "Bhilai Institute of Technology (BIT), Raipur",
-    degree: "B.Tech, Computer Science and Engineering",
-    period: "2019 – 2023",
-    score: "CGPA 8.8",
+    title: "Frameworks & Libraries",
+    items: ["PyTorch", "TensorFlow / Keras", "scikit-learn", "Hugging Face", "Pandas", "NumPy"],
   },
+  { title: "Tools", items: ["GitHub", "Jupyter", "Google Colab", "Streamlit", "Docker", "Matplotlib", "Seaborn"] },
 ];
 
 export const experience = [
   {
-    role: "Data Science Intern",
-    company: "AI Variant",
-    period: "Dec 2023 – Jun 2024",
+    role: "Research Fellow",
+    org: "CVIT, IIIT Hyderabad",
+    period: "Mar 2026 – Present",
+    kind: "Research",
     points: [
-      "Streamlined data preprocessing and analytics pipelines, cutting model deployment time and improving operational efficiency.",
-      "Designed and deployed production-grade ML models with Python, Pandas and Streamlit for real-time analysis and visualization.",
-      "Fine-tuned algorithms with the team for higher accuracy and better generalization.",
-      "Ran exploratory analysis on large datasets to surface patterns that guided strategic decisions.",
-      "Prepared stakeholder-ready reports and presentations that explained technical findings clearly.",
+      "Applied YOLO to vehicle detection and drone video analysis within a Drone Analytics Management System.",
+      "Worked with VLMs and LLMs on zero-shot evaluation, parameter-efficient fine-tuning (PEFT), custom adapters and visual question answering (VQA).",
+      "Investigated road-infrastructure deficiencies using visual events, IMU motion-sensor data, GPS and Indian Roads Congress (IRC) rules, linking braking or swerving to road conditions, location and applicable rules.",
+      "Worked on temporal change detection by comparing videos of the same road stretch captured at different times.",
+      "Developed a custom vision-language model (VLM).",
     ],
+    tags: ["Drone analytics", "VLM", "PEFT", "Change detection", "IRC rules"],
+  },
+  {
+    role: "Data Science Intern",
+    org: "AI Variant",
+    period: "Dec 2023 – Jun 2024",
+    kind: "Industry",
+    points: [
+      "Prepared and analysed datasets with Python and Pandas, performing data cleaning and exploratory data analysis to support machine-learning experiments.",
+      "Built Streamlit applications for model predictions and visualizations; collaborated on model tuning and communicated findings through reports and presentations.",
+    ],
+    tags: ["Python", "Pandas", "EDA", "Streamlit"],
   },
 ];
 
@@ -60,108 +88,76 @@ export interface Project {
   title: string;
   kicker: string;
   summary: string;
-  problem: string;
-  approach: string;
-  result: string;
+  points: string[];
+  focus: string[];
   tech: string[];
   repo: string;
   demo?: string;
-  accent: string;
+  featured?: boolean;
+  accent: "a" | "b" | "c";
 }
 
 export const projects: Project[] = [
   {
+    id: "drone",
+    title: "Drone-Based Road Asset & Vehicle Detection",
+    kicker: "Computer vision · Edge deployment",
+    summary:
+      "Detection of road assets and vehicles from drone video, benchmarked across three YOLO generations and packaged as a web application.",
+    points: [
+      "Trained and benchmarked YOLOv8, YOLO11 and YOLO26 on an HPC cluster using JATAYU (10 classes) and DRASHTI-HaOBB (14 classes), covering horizontal and oriented bounding-box detection.",
+      "Exported YOLOv8n and YOLO11s to INT8 TensorFlow Lite and built a web application with model comparison, FPS monitoring, VLM scene queries and CSV reporting.",
+    ],
+    focus: ["Object detection", "Oriented boxes", "Edge inference", "VLM queries"],
+    tech: ["Python", "PyTorch", "YOLO", "TensorFlow Lite", "VLMs", "Ollama"],
+    repo: "https://github.com/VAbhishek12/Drone-Traffic-detection",
+    featured: true,
+    accent: "a",
+  },
+  {
     id: "adversarial",
     title: "Adversarial Robustness of CNNs",
-    kicker: "M.Tech thesis · CIFAR-10",
+    kicker: "Controlled study · CIFAR-10",
     summary:
-      "A controlled study of whether smoothing and denoising modules really make adversarially trained CNNs more robust.",
-    problem:
-      "Defences that add a Gaussian smoothing layer, a denoising block and a mixed pooling head report large robustness gains, but they are often evaluated with a perturbation budget applied to a normalised input, which understates the attack.",
-    approach:
-      "Retrained ResNet-18 variants under one shared PGD adversarial-training recipe and re-evaluated everything in pixel space with PGD-20 and APGD, alongside accuracy, F1, MCC, AUROC, calibration and attack-success metrics.",
-    result:
-      "The plain ResNet-18 was the strongest design (49.2% PGD-20 at ε = 8/255). The extra modules did not help, and the normalised-budget convention made the original SecureCNN look about 10× stronger than it is (59.1% vs 6.0%).",
-    tech: ["PyTorch", "torchattacks", "PGD / APGD", "CIFAR-10", "ResNet"],
+      "Do Gaussian smoothing, residual denoising and pooling changes really make adversarially trained ResNet-18 models more robust?",
+    points: [
+      "Compared the modifications under one shared training recipe; PGD-20 on 10,000 test images at a pixel-space budget of 8/255, plus APGD-CE and APGD-DLR on a 1,000-image subset.",
+      "Plain ResNet-18 reached 49.18% PGD-20 accuracy versus 46.61% with all three modifications, and the study documents how normalised and pixel-space budgets change the picture.",
+    ],
+    focus: ["Robustness", "Evaluation protocol", "Reproducibility"],
+    tech: ["Python", "PyTorch", "torchvision", "torchattacks", "CIFAR-10"],
     repo: "https://github.com/VAbhishek12/Adversarial-Robustness",
-    accent: "#2dd4bf",
+    accent: "b",
   },
   {
     id: "brain",
-    title: "Brain Tumor Detection",
-    kicker: "Deep learning · Medical imaging",
-    summary: "A CNN that classifies brain MRI slices as tumor or no tumor, served as a live Streamlit app.",
-    problem: "Screening MRI slices by eye is slow; a lightweight classifier can act as a first-pass triage demo.",
-    approach:
-      "Trained CNNs on 2,500 grayscale MRI slices (200×200), compared a plain network with an augmented one (rotation, shifts, shear, flips), and deployed the model behind an upload / URL interface.",
-    result:
-      "97% accuracy on the 250-image held-out set for the plain CNN, with notes on overfitting and the effect of augmentation documented in the repo.",
-    tech: ["TensorFlow / Keras", "CNN", "OpenCV", "Streamlit"],
+    title: "Brain Tumor Classification",
+    kicker: "Medical imaging · Deep learning",
+    summary: "A CNN that classifies MRI slices as tumor or no tumor, with an interactive Streamlit interface.",
+    points: [
+      "Built the classifier with image preprocessing and augmentation, then wrapped it in a Streamlit app for interactive inference.",
+    ],
+    focus: ["Image classification", "Augmentation", "Interactive demo"],
+    tech: ["Python", "TensorFlow / Keras", "OpenCV", "Streamlit"],
     repo: "https://github.com/VAbhishek12/BrainTumor_Detection",
     demo: "https://braintumourdetction-12.streamlit.app/",
-    accent: "#a78bfa",
-  },
-  {
-    id: "medqa",
-    title: "AI Medical Q&A Chatbot",
-    kicker: "NLP · Retrieval",
-    summary: "Multilingual answers to disease questions, retrieved from structured Wikipedia sections.",
-    problem: "People ask health questions in many languages, and raw search results are hard to trust and skim.",
-    approach:
-      "Extracts symptoms, causes, treatment, diagnosis and prevention sections, turns them into Q&A pairs, translates the user's question to English, and matches it with SentenceTransformers cosine similarity.",
-    result:
-      "Returns the matched passage with its reference question and a confidence score, and declines to answer below a 0.65 threshold instead of guessing.",
-    tech: ["SentenceTransformers", "PyTorch", "Wikipedia API", "Streamlit"],
-    repo: "https://github.com/VAbhishek12/AI-Medical-Q-A-Chatbot",
-    accent: "#fbbf24",
-  },
-  {
-    id: "books",
-    title: "Book Recommendation System",
-    kicker: "Recommender systems",
-    summary: "Item-based collaborative filtering that suggests books similar to one you already like.",
-    problem: "Readers with sparse rating histories still want relevant suggestions.",
-    approach:
-      "Cleaned the Book-Crossing ratings, kept active readers and well-rated titles, built a book × user matrix and ranked neighbours by cosine similarity.",
-    result: "A Streamlit app that returns five similar titles with covers, authors and similarity scores.",
-    tech: ["Python", "Pandas", "scikit-learn", "Streamlit"],
-    repo: "https://github.com/VAbhishek12/Book_Recomandation_System",
-    accent: "#fb7185",
+    accent: "c",
   },
 ];
 
-export const skillGroups = [
-  { title: "Programming", items: ["Python", "SQL", "API Integration"] },
+export const education = [
   {
-    title: "AI / ML",
-    items: [
-      "Supervised & Unsupervised Learning",
-      "Classification",
-      "Regression",
-      "Clustering",
-      "Feature Engineering",
-      "Model Optimization",
-      "Time-Series Forecasting",
-    ],
+    degree: "M.Tech, Computer Science and Engineering (AI)",
+    school: "Centre for Development of Advanced Computing (C-DAC), Mohali",
+    period: "2024 – 2026",
+    score: "CGPA 9.0",
   },
   {
-    title: "NLP & GenAI",
-    items: ["NER", "Embeddings", "Summarization", "RAG Pipelines", "Prompt Engineering", "Hugging Face", "LangChain"],
-  },
-  { title: "Computer Vision", items: ["OpenCV", "CNNs", "YOLO", "RetinaNet", "Segmentation", "OCR"] },
-  {
-    title: "Libraries",
-    items: ["Scikit-learn", "TensorFlow / Keras", "PyTorch", "Transformers", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-  },
-  {
-    title: "Cloud & Tools",
-    items: ["Streamlit Cloud", "Docker", "Google Colab", "Azure AI Studio (basics)", "Jupyter", "Power BI", "Excel", "GitHub"],
+    degree: "B.Tech, Computer Science and Engineering",
+    school: "Bhilai Institute of Technology, Raipur",
+    period: "2019 – 2023",
+    score: "CGPA 8.8",
   },
 ];
 
-export const certificates = [
-  { name: "Data Science Certification", issuer: "ExcelR" },
-  { name: "SQL (Intermediate)", issuer: "HackerRank" },
-  { name: "Master's Program in Data Science", issuer: "NASSCOM" },
-  { name: "Introduction to Python", issuer: "Coding Ninjas" },
-];
+export const achievements = ["Paper accepted at ICVGIP 2026"];

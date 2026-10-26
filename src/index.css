@@ -1,12 +1,44 @@
 @import "tailwindcss";
 
-@theme {
-  --color-ink: #0a0c10;
-  --color-panel: #11141b;
-  --color-line: #1e232d;
-  --color-mist: #8b93a3;
-  --color-snow: #e8ebf1;
-  --color-accent: #2dd4bf;
+:root {
+  --ink: #09090c;
+  --panel: #111116;
+  --panel-2: #17171e;
+  --line: #24242d;
+  --mist: #9b9ba8;
+  --snow: #f4efe7;
+  --accent: #ff8a4c;
+  --accent-2: #7aa2ff;
+  --accent-3: #c4a6ff;
+  --on-accent: #1a0e07;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --ink: #faf7f2;
+  --panel: #ffffff;
+  --panel-2: #f2eee7;
+  --line: #e4ded3;
+  --mist: #666672;
+  --snow: #15151a;
+  --accent: #e4531a;
+  --accent-2: #3a62e0;
+  --accent-3: #7b56d6;
+  --on-accent: #ffffff;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel-2);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+  --color-snow: var(--snow);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent-2);
+  --color-accent3: var(--accent-3);
+  --color-onaccent: var(--on-accent);
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Space Grotesk", "Inter", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -18,34 +50,91 @@ html {
 }
 
 body {
-  background: var(--color-ink);
-  color: var(--color-snow);
+  background: var(--ink);
+  color: var(--snow);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
-.section-title {
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.display {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
-.glass {
-  background: color-mix(in srgb, var(--color-panel) 80%, transparent);
-  border: 1px solid var(--color-line);
-  backdrop-filter: blur(10px);
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+/* Spotlight that follows the pointer on cards */
+.spot {
+  position: relative;
+  isolation: isolate;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--c, var(--accent)) 16%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+  pointer-events: none;
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+.dot-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--snow) 14%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(70% 60% at 50% 40%, #000, transparent);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(40px, -30px, 0) scale(1.12); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, var(--accent), var(--accent-3) 55%, var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  * {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

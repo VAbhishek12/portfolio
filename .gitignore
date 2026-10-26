@@ -7,3 +7,7 @@ Thumbs.db
 .vscode/
 
 *.tsbuildinfo
+.vercel
+
+_archive_previous_design/
+CHAT_HISTORY.md

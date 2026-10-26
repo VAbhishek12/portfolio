@@ -1,24 +1,41 @@
-import { profile, stats } from "../data/portfolio";
+import { profile, skillGroups } from "../data/portfolio";
 import Reveal, { SectionHeading } from "./Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-5 py-24">
-      <SectionHeading index="01" title="About" />
-      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-        <Reveal className="space-y-5 text-lg leading-relaxed text-mist">
-          {profile.summary.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
+    <section id="about" className="mx-auto max-w-6xl px-5 py-28">
+      <SectionHeading eyebrow="About" title="What I work on" />
+
+      <Reveal className="max-w-3xl space-y-5 text-lg leading-relaxed text-mist">
+        {profile.about.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+      </Reveal>
+
+      <div className="mt-20">
+        <Reveal>
+          <h3 className="display text-2xl">Toolbox</h3>
         </Reveal>
-        <Reveal delay={0.1} className="grid grid-cols-2 gap-4 self-start">
-          {stats.map((s) => (
-            <div key={s.label} className="glass rounded-2xl p-5">
-              <div className="section-title text-3xl text-accent">{s.value}</div>
-              <div className="mt-1 text-sm text-mist">{s.label}</div>
-            </div>
+        <div className="mt-6">
+          {skillGroups.map((g) => (
+            <Reveal key={g.title}>
+              <div className="grid gap-3 border-t border-dashed border-line py-6 sm:grid-cols-[220px_1fr] sm:gap-8">
+                <h4 className="font-mono text-sm uppercase tracking-wider text-accent">{g.title}</h4>
+                <ul className="flex flex-wrap gap-2">
+                  {g.items.map((s) => (
+                    <li
+                      key={s}
+                      className="rounded-full border border-line bg-panel px-3.5 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent"
+                    >
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
-        </Reveal>
+          <div className="border-t border-dashed border-line" />
+        </div>
       </div>
     </section>
   );
